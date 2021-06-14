@@ -112,6 +112,8 @@ publish() {
         dockerfile="./8/debian/buster-slim/hotspot/Dockerfile"
     elif [ "$variant" == "-jdk11" ] ; then
         dockerfile="./11/debian/buster/hotspot/Dockerfile"
+    elif [ "$variant" == "-almalinux" ] ; then
+        dockerfile="./11/almalinux/almalinux8/hotspot/Dockerfile"
     elif [ "$variant" == "-centos" ] ; then
         dockerfile="./8/centos/centos8/hotspot/Dockerfile"
     elif [ "$variant" == "-centos7" ] ; then

@@ -25,6 +25,9 @@ build-slim:
 build-jdk11:
 	docker build --file 11/debian/buster/hotspot/Dockerfile .
 
+build-almalinux:
+	docker build --file 11/almalinux/almalinux8/hotspot/Dockerfile .
+
 build-centos:
 	docker build --file 8/centos/centos8/hotspot/Dockerfile .
 
@@ -66,6 +69,9 @@ test-slim: test-run-slim
 test-jdk11: DIRECTORY=11/debian/buster/hotspot
 test-jdk11: test-run-jdk11
 
+test-almalinux: DIRECTORY=11/almalinux/almalinux8/hotspot
+test-almalinux: test-run-almalinux
+
 test-centos: DIRECTORY=8/centos/centos8/hotspot
 test-centos: test-run-centos
 
@@ -92,6 +98,7 @@ publish:
 	./.ci/publish.sh --variant alpine ; \
 	./.ci/publish.sh --variant slim ; \
 	./.ci/publish.sh --variant jdk11 --start-after 2.151 ; \
+	./.ci/publish.sh --variant almalinux --start-after 2.299 ; \
 	./.ci/publish.sh --variant centos --start-after 2.181 ; \
 	./.ci/publish.sh --variant centos7 --start-after 2.199 ;
 
