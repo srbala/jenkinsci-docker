@@ -6,8 +6,13 @@ baseurl=https://adoptopenjdk.jfrog.io/adoptopenjdk/rpm/centos/$releasever/$basea
 enabled=1\n\
 gpgcheck=1\n\
 gpgkey=https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public' > /etc/yum.repos.d/adoptopenjdk.repo && \
-    dnf update -y && dnf install -y git curl adoptopenjdk-11-hotspot-11.0.11+9-3 freetype fontconfig unzip which && \
-    curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.rpm.sh | env os=el dist=8 bash && dnf install -y git-lfs && dnf clean all
+    dnf --setopt=install_weak_deps=0 --setopt=tsflags=nodocs update -y && \
+    dnf --setopt=install_weak_deps=0 --setopt=tsflags=nodocs install -y \
+	git curl adoptopenjdk-11-hotspot-11.0.11+9-3 freetype fontconfig unzip which && \
+    curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.rpm.sh | \
+	env os=el dist=8 bash && \
+    dnf install --setopt=install_weak_deps=0 --setopt=tsflags=nodocs -y git-lfs && \
+    dnf clean all
 
 ARG user=jenkins
 ARG group=jenkins
